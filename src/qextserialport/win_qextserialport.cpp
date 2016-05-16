@@ -184,7 +184,9 @@ bool Win_QextSerialPort::open(OpenMode mode) {
         return isOpen();
     if (!isOpen()) {
         /*open the port*/
-        Win_Handle=CreateFileA(port.toStdString().c_str(), GENERIC_READ|GENERIC_WRITE,
+        QString port_path = "\\\\.\\";
+        port_path += port;
+        Win_Handle=CreateFileA(port_path.toStdString().c_str(), GENERIC_READ|GENERIC_WRITE,
                               FILE_SHARE_READ|FILE_SHARE_WRITE, NULL, OPEN_EXISTING, dwFlagsAndAttributes, NULL);
         if (Win_Handle!=INVALID_HANDLE_VALUE) {
             /*configure port settings*/
